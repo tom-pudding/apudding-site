@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>apudding — App Developer</title>
+  <style>
+    body {
+      font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+      background: #2a2a2e;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .name { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px; }
+    .sub { font-size: 15px; color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+    .apps { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+    .app-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 14px 20px;
+      color: #fff;
+      text-decoration: none;
+      width: 280px;
+      transition: background 0.15s;
+    }
+    .app-link:hover { background: rgba(255,255,255,0.12); }
+    .app-link svg { border-radius: 22%; flex-shrink: 0; }
+    .app-info .app-title { font-size: 16px; font-weight: 600; }
+    .app-info .app-desc { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    footer { margin-top: 48px; font-size: 12px; color: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+  <div class="name">apudding</div>
+  <div class="sub">App Developer</div>
+  <div class="apps">
+    <a href="/apps/talkbridge/" class="app-link">
+      <svg width="44" height="44" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a2a2e"/>
+            <stop offset="100%" stop-color="#111114"/>
+          </linearGradient>
+        </defs>
+        <rect width="120" height="120" fill="url(#ibg)"/>
+        <path d="M 20,16 L 58,16 Q 68,16 68,26 L 68,44 Q 68,54 58,54 L 28,54 L 8,67 L 20,54 Q 10,54 10,44 L 10,26 Q 10,16 20,16 Z" fill="#E6F2FF"/>
+        <path d="M 62,50 L 100,50 Q 110,50 110,60 L 110,78 Q 110,88 100,88 L 112,102 L 92,88 L 62,88 Q 52,88 52,78 L 52,60 Q 52,50 62,50 Z" fill="#FFEDF5"/>
+        <text x="39" y="35" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="18" font-weight="800" fill="#0044CC" letter-spacing="1">Talk</text>
+        <text x="81" y="69" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="800" fill="#CC0055" letter-spacing="0.5">Bridge</text>
+      </svg>
+      <div class="app-info">
+        <div class="app-title">TalkBridge</div>
+        <div class="app-desc">リアルタイム会話サポート</div>
+      </div>
+    </a>
+  </div>
+  <footer>© 2026 apudding</footer>
+</body>
+</html>
