@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="TalkBridge — 聴覚障害者と健常者のリアルタイム会話をサポートするiOSアプリ">
+  <link rel="icon" href="/talkbridge/app-icon.png" type="image/png">
   <title>TalkBridge — リアルタイム会話サポートアプリ</title>
   <style>
     :root {
@@ -36,7 +37,13 @@
       align-items: center;
       gap: 14px;
     }
-    header svg { flex-shrink: 0; border-radius: 22%; }
+    header img {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 22%;
+      display: block;
+    }
     header .app-name {
       font-size: 22px;
       font-weight: 700;
@@ -216,20 +223,7 @@
 
 <!-- Header -->
 <header>
-  <!-- TalkBridge icon (inline SVG) -->
-  <svg width="48" height="48" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#2a2a2e"/>
-        <stop offset="100%" stop-color="#111114"/>
-      </linearGradient>
-    </defs>
-    <rect width="120" height="120" fill="url(#hbg)"/>
-    <path d="M 20,16 L 58,16 Q 68,16 68,26 L 68,44 Q 68,54 58,54 L 28,54 L 8,67 L 20,54 Q 10,54 10,44 L 10,26 Q 10,16 20,16 Z" fill="#E6F2FF"/>
-    <path d="M 62,50 L 100,50 Q 110,50 110,60 L 110,78 Q 110,88 100,88 L 112,102 L 92,88 L 62,88 Q 52,88 52,78 L 52,60 Q 52,50 62,50 Z" fill="#FFEDF5"/>
-    <text x="39" y="35" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="18" font-weight="800" fill="#0044CC" letter-spacing="1">Talk</text>
-    <text x="81" y="69" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="800" fill="#CC0055" letter-spacing="0.5">Bridge</text>
-  </svg>
+  <img src="/talkbridge/app-icon.png" alt="TalkBridge app icon">
   <div>
     <div class="app-name">TalkBridge</div>
     <div class="tagline">声とテキストをつなぐ会話サポートアプリ</div>
