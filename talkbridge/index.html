@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TalkBridge は、声とテキストをつないでスムーズな会話を支える会話サポートアプリです。">
+  <title>TalkBridge | apudding</title>
+  <style>
+    :root {
+      --bg: #f4f4f1;
+      --surface: rgba(255, 255, 255, 0.88);
+      --surface-strong: #ffffff;
+      --text: #17202a;
+      --muted: #5f6873;
+      --line: rgba(23, 32, 42, 0.08);
+      --charcoal: #1e2328;
+      --blue: #2f78d8;
+      --rose: #d85b8a;
+      --shadow: 0 18px 50px rgba(20, 28, 36, 0.08);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(47, 120, 216, 0.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(216, 91, 138, 0.10), transparent 26%),
+        linear-gradient(180deg, #fbfbf8 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--charcoal);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .section-card {
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: rgba(23, 32, 42, 0.18);
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 7vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 34rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .pill.primary {
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .pill.secondary {
+      background: rgba(23, 32, 42, 0.05);
+      color: var(--charcoal);
+      border: 1px solid var(--line);
+    }
+
+    .hero-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,0.92), rgba(248,250,252,0.78)),
+        linear-gradient(135deg, rgba(47, 120, 216, 0.12), rgba(216, 91, 138, 0.08));
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .app-badge svg {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      flex-shrink: 0;
+      box-shadow: 0 14px 30px rgba(23, 32, 42, 0.12);
+    }
+
+    .app-badge strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    .app-badge span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(23, 32, 42, 0.06);
+    }
+
+    .status-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .status p {
+      margin: 0;
+      font-size: 15px;
+      color: var(--charcoal);
+    }
+
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .section-card h2 {
+      margin: 0 0 16px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .section-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .features {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .feature {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(23, 32, 42, 0.04);
+      border: 1px solid rgba(23, 32, 42, 0.05);
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .feature span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .link-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(47, 120, 216, 0.08);
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .contact {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+    }
+
+    .contact-row strong {
+      min-width: 84px;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .sections {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .section-card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 20px, 1120px);
+        padding-top: 16px;
+        padding-bottom: 48px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .hero-copy p,
+      .section-card p {
+        font-size: 15px;
+      }
+
+      .pill {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">apudding</div>
+      <a class="home-link" href="/">apudding.com</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Hero</div>
+        <h1>TalkBridge</h1>
+        <p>TalkBridge は、相手の声を読み取りながら、自分の返事をテキストや音声で伝えられる会話サポートアプリです。対面のやり取りを止めずに、スマートフォン 1 台で自然なコミュニケーションを助けます。</p>
+        <div class="hero-actions">
+          <span class="pill primary">App Store link coming soon</span>
+          <a class="pill secondary" href="https://tom-pudding.github.io/legal/talkbridge/">Privacy Policy</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="app-badge">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="talkbridge-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2a2e"/>
+                <stop offset="100%" stop-color="#111114"/>
+              </linearGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#talkbridge-bg)"/>
+            <path d="M 20,16 L 58,16 Q 68,16 68,26 L 68,44 Q 68,54 58,54 L 28,54 L 8,67 L 20,54 Q 10,54 10,44 L 10,26 Q 10,16 20,16 Z" fill="#E6F2FF"/>
+            <path d="M 62,50 L 100,50 Q 110,50 110,60 L 110,78 Q 110,88 100,88 L 112,102 L 92,88 L 62,88 Q 52,88 52,78 L 52,60 Q 52,50 62,50 Z" fill="#FFEDF5"/>
+            <text x="39" y="35" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="18" font-weight="800" fill="#0044CC" letter-spacing="1">Talk</text>
+            <text x="81" y="69" dy="2" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica Neue,Helvetica,Arial,sans-serif" font-size="15" font-weight="800" fill="#CC0055" letter-spacing="0.5">Bridge</text>
+          </svg>
+          <div>
+            <strong>TalkBridge</strong>
+            <span>Conversation support, designed for real-world use.</span>
+          </div>
+        </div>
+
+        <div class="status">
+          <span class="status-label">Launch Status</span>
+          <p>App Store 公開後にこの場所へダウンロードリンクを追加できる構成にしています。</p>
+        </div>
+
+        <div class="status">
+          <span class="status-label">Best For</span>
+          <p>短いやり取りから窓口対応まで、文字と音声を行き来しながら会話を進めたい場面。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section class="section-card">
+        <div class="eyebrow">About</div>
+        <h2>About TalkBridge</h2>
+        <p>TalkBridge は、会話の流れを止めにくくすることを目指したアプリです。相手の話した内容を画面で確認しながら、返事は文字で見せたり、そのまま読み上げたりできます。説明的すぎないシンプルな構成で、初めてでもすぐ使い始められます。</p>
+      </section>
+
+      <section class="section-card">
+        <div class="eyebrow">Features</div>
+        <h2>Features</h2>
+        <div class="features">
+          <div class="feature">
+            <strong>Real-time transcript</strong>
+            <span>相手の声をその場でテキストとして表示し、会話の内容を追いやすくします。</span>
+          </div>
+          <div class="feature">
+            <strong>Typed reply with optional speech</strong>
+            <span>入力した返事をそのまま見せることも、音声で読み上げることもできます。</span>
+          </div>
+          <div class="feature">
+            <strong>Built for quick handoff</strong>
+            <span>設定を深く開かなくても、その場で使い始めやすいレイアウトです。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <div class="eyebrow">Privacy</div>
+        <h2>Privacy Policy</h2>
+        <p>TalkBridge のプライバシーポリシーは以下のページで公開しています。App Store Connect の Privacy Policy URL にもこのリンクを設定してください。</p>
+        <a class="link-block" href="https://tom-pudding.github.io/legal/talkbridge/">https://tom-pudding.github.io/legal/talkbridge/</a>
+      </section>
+
+      <section class="section-card">
+        <div class="eyebrow">Contact</div>
+        <h2>Contact</h2>
+        <p>サポートやお問い合わせは以下までお願いします。将来的に App Store リンクや追加情報を載せる場合も、このページを起点に更新できます。</p>
+        <div class="contact">
+          <div class="contact-row">
+            <strong>App</strong>
+            <span>TalkBridge</span>
+          </div>
+          <div class="contact-row">
+            <strong>Email</strong>
+            <a href="mailto:yuatomo@gmail.com">yuatomo@gmail.com</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>© 2026 apudding</footer>
+  </div>
+</body>
+</html>
